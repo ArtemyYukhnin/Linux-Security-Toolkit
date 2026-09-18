@@ -1,3 +1,3 @@
 #include <sys/utsname.h>
-void print(utsname&);
-void get_info();
+void print(struct utsname&);
+void get_system_info();
