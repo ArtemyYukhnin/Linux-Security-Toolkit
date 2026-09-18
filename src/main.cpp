@@ -1,6 +1,8 @@
 #include <iostream>
+#include "../include/system_info.h"
+#include <sys/utsname.h>
 
 int main(){
-  std::cout<<"yes!\n";
+  get_info();
   return 0;
 }
