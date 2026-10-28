@@ -8,6 +8,8 @@ add_executable(security-toolkit)
 
 target_sources(security-toolkit
   PRIVATE
-    src/main.cpp
-    src/system_info.cpp
+  src/main.cpp
+  src/system_info.cpp
+  src/process_info.cpp
 )
+

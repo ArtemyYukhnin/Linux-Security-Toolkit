@@ -1,3 +1,5 @@
+#include <cctype>
+#include <csignal>
 #include <cstddef>
 #include <string>
 #include <fstream>
@@ -7,7 +9,23 @@
 #include <unistd.h>
 #include <sys/utsname.h>
 
-//======uname and host_name========
+
+//======system info=======
+//get struct where is os info
+
+static void get_system_info(){
+    struct utsname x;
+    if(uname(&x) != 0){
+        std::perror("uname");
+        return;
+    };
+    std::cout << x.sysname << "\n" << x.nodename << "\n" << x.release << "\n"  << x.version << "\n"  << x.machine << "\n";
+}
+
+
+//==========host name=============
+//gethostname return os name to char[]
+
 static void print_host_name(){
     char name[30];
     name[29] = '\0';
@@ -19,6 +37,7 @@ static void print_host_name(){
 }
 
 //========proc info=======
+//get info from dir /proc
 
 static void print_cpu_info(){
     std::ifstream f;
@@ -39,22 +58,15 @@ static void print_cpu_info(){
         std::cout<<tmp.substr(skip+2) << '\n';
         break;
     }
+    f.close();
 }
 
 
-//=======print======
+//=========print=========
+//use in main.cpp
 
-static void print(struct utsname &x){
-  std::cout << x.sysname << "\n" << x.nodename << "\n" << x.release << "\n"  << x.version << "\n"  << x.machine << "\n";
-  std::cout << "host name : "; print_host_name();
-  print_cpu_info();
-}
-
-void get_system_info(){
-  struct utsname x;
-  if(uname(&x) != 0){
-      std::perror("uname");
-      return;
-  };
-  print(x);
+void print(){
+    get_system_info();
+    std::cout << "host name : "; print_host_name();
+    print_cpu_info();
 }
