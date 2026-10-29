@@ -11,5 +11,12 @@ target_sources(security-toolkit
   src/main.cpp
   src/system_info.cpp
   src/process_info.cpp
+  src/file_security.cpp
 )
 
+
+target_compile_options(security-toolkit PRIVATE
+  -Wall
+  -Wextra
+  -Wpedantic
+ )
